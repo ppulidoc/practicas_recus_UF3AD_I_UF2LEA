@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const jsonpath = require("jsonpath");
 app.use(cors());
 
 app.use(express.json());
@@ -93,6 +94,35 @@ const personajes = [];
       res.json(personajes);
 
     });
+});
+
+//json path
+// fer nmp install jsonpath
+
+app.get('/api/exJsonPath', async (req, res) => {
+  //Exemple d'objecte Json
+  const data = {
+    books: [
+      {
+        title: 'The Alchemist',
+        author: 'Paulo Londra',
+        yer: 1998
+      },
+      {
+        title: 'To Kill a Mockingbird',
+        author: 'Calvin Klein',
+        year: 2002
+      },
+      {
+        title: 'Harry Potter y la Piedra Filosofal',
+        author: 'JK Rowling',
+        year: 2001
+      }
+    ]
+  };
+  //Consulta amb JsonPath per a titols de llibres de despres del 2000
+  const result = await jsonpath.query(data, '$.books[?(@.year > 2000)].title');
+  console.log(result);
 });
 
 

@@ -13,7 +13,8 @@ export class ExerisisComponent {
     //this.ex4()
     //this.ex5()
     //this.ex6()
-    this.ex7();
+    //this.ex7();
+    this.ex8();
   }
 
   //escrito en el node.js
@@ -53,5 +54,10 @@ export class ExerisisComponent {
       console.log(jedis); // JSON sencer
       console.log(jedis.name); // Camp del JSON
     })
+  }
+  ex8(){
+    this.http.get<any>("http://localhost:3080/api/exJsonPath").subscribe( (llibres) => {
+      console.log(llibres); // JSON sencer
+    });
   }
 }
